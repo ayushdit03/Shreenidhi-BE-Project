@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parkinson's Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles1.css') }}">
+</head>
+<body>
+    <marquee behavior="scroll" direction="left" style="color:black; font-size:28px; text-shadow:1px 1px 2px white; font-weight:bold;">
+    Parkinson's Disease Detection
+    </marquee>
+    <div class="container">
+        <h2>Click on Check Status</h2>
+        <form id="data-form">
+            <label for="person">Enter Person Number (Sr.No.):</label>
+            <input type="text" id="person" name="person" required placeholder="e.g., 1">
+            <button type="submit">Check Status</button>
+        </form>
+        <div id="result" class="result"></div>
+
+        <h2>Upload New CSV File</h2>
+        <form id="upload-form" enctype="multipart/form-data">
+            <input type="file" name="file" id="file" required>
+            <button type="submit">Upload and Predict</button>
+        </form>
+        <div id="upload-result"></div>
+    </div>
+
+    <!-- Graphs outside container (full page width) -->
+    <div id="graph-section" class="graph-section">
+        <img id="graph" src="" alt="Graphs will appear here">
+    </div>
+
+    <div class="footer">
+        Made by <a href="https://github.com/ayushdit03/Shreenidhi-BE-Project" target="_blank">Believers - Batch 2025</a>
+    </div>
+
+    <script>
+        document.getElementById('data-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const person = document.getElementById('person').value;
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ person }),
+            });
+            const data = await response.json();
+            const resultDiv = document.getElementById('result');
+            if (data.error) {
+                resultDiv.textContent = 'Error: ' + data.error;
+            } else {
+                resultDiv.textContent = 'Result: ' + data.result;
+                document.getElementById('graph').src = '/' + data.graph_path + '?rand=' + Math.random();
+            }
+        });
+
+        document.getElementById('upload-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData();
+            const fileField = document.getElementById('file');
+            formData.append('file', fileField.files[0]);
+
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            const uploadDiv = document.getElementById('upload-result');
+            if (data.error) {
+                uploadDiv.textContent = 'Error: ' + data.error;
+            } else {
+                uploadDiv.textContent = data.message;
+                document.getElementById('graph').src = '/' + data.graph_path + '?rand=' + Math.random();
+            }
+        });
+    </script>
+</body>
+</html>
