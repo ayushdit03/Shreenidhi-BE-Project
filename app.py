@@ -134,6 +134,14 @@ def upload_file():
         except Exception as e:
             return jsonify({'error': str(e)})
 
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))  # get Render's assigned port
+    if not os.path.exists(app.config['UPLOAD_FOLDER']):
+        os.makedirs(app.config['UPLOAD_FOLDER'])
+    app.run(host='0.0.0.0', port=port, debug=True)
+
+
 if __name__ == '__main__':
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
         os.makedirs(app.config['UPLOAD_FOLDER'])
