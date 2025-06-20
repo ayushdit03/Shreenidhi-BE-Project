@@ -1,0 +1,78 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #74ebd5, #9face6);
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.main-heading {
+    font-size: 28px;
+    color: black;
+    text-shadow: 1px 1px 2px white;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px 40px;
+    width: 450px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+h2 {
+    color: #333;
+}
+
+input[type="text"], input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+}
+
+button {
+    background-color: #74ebd5;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background-color: #9face6;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Graphs outside box and full width */
+.graph-section {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.graph-section img {
+    width: 95%;
+    max-width: 1200px;
+    border: 2px solid #333;
+    border-radius: 10px;
+}
+
+/* Footer after graph */
+.footer {
+    text-align: center;
+    font-size: 16px;
+    color: black;
+    margin: 20px 0;
+}
